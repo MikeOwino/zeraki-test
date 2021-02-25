@@ -1,4 +1,30 @@
-<table>
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    
+    <style>
+        body {font: 17px Calibri;}
+        table 
+        {
+            width: auto;
+        }
+        table, th, td 
+        {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div ng-app="myApp" 
+        ng-controller="myController">
+
+       <p><b>Student Report</b></p>
+
+        <table>
 	<tbody>
 		<tr>
 			<td>
@@ -507,3 +533,33 @@
 		</tr>
 	</tbody>
 </table>
+
+    </div>
+</body>
+
+<!--The Controller-->
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myController',
+        function ($scope, $http) {
+
+            var request = {
+                method: 'get',
+                url: 'https://www.encodedna.com/angularjs/tutorial/birds.json',
+                dataType: 'json',
+                contentType: "application/json"
+            };
+
+            $scope.arrBirds = new Array;
+
+            $http(request)
+                .success(function (jsonData) {
+                    $scope.arrBirds = jsonData;
+                    $scope.list = $scope.arrBirds;
+                })
+                .error(function () {
+
+                });
+        });
+</script>
+</html>
